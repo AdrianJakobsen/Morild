@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns:i="https://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://schemas.datacontract.org/2004/07/MorilDataServer.services.database.models"
+    lang="en" xml:lang="en">
+
+    <head>
+        <title>Morild Data BA </title>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+        <link rel="stylesheet" type="text/css" href="css/Background.css">
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="codrops-top">
+                <span class="right">
+                </span>
+                <div class="clr"></div>
+            </div>
+            <header>
+                <h1><b><big>Morild Data BA</big></b></h1>
+            </header>
+            <nav>
+                <ul>
+                <li id="contactIT"><a href="#"> Contact IT </a></li>
+                <li><a href="displayProjects.html"> Display projects </a> </li>
+                <li class = "c1" ><a href="#"> Add new customer </a> </li>
+                <li><a href="getOrder.html"> Get project </a> </li>
+                <li><a href="customerPage.html"> Customer list </a> </li>
+                </ul>
+            </nav>
+            <section>
+                <div class="form-style-2">
+                    <form class="pure-form pure-form-aligned" name="formAddNew" id:"orders" method="POST" action="https://morilddata.azurewebsites.net/_api/database/customers">
+                        <br><label for="company"><b>Company:</b></label>
+                        <input type="text" name="CompanyName">
+                        <br>
+                        <br><label for="contactPerson"><b>Contact person:</b></label>
+                        <input type= "text" name="ContactPerson">
+                        <br><label for="PhoneNumber"><b>Phonenumber:</b></label>
+                        <input type="text" name="PhoneNumber">
+                        <br><label for="Email"><b>Email:</b></label>
+                        <input type="text" name="Email">
+                        <br><label for="Adress"><b>Adress:</b></label>
+                        <input type="text" name="Adress">
+                    </form>
+                    <button type="add" id="add"> Add</button>
+                </div>
+            </section>
+
+    <!-- SCRIPTS -->
+    <script type='text/javascript' src="https://code.jquery.com/jquery-1.12.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+    $(function (){
+
+        var customers = ('#customers');
+        var CompanyName = ('#CompanyName');
+        var ContactPerson = ('#ContactPerson');
+        var PhoneNumber = ('#PhoneNumber');
+        var Email = ('#Email');
+        var Adress = ('#Adress');
+
+        function addOrder(customer) {
+            customers.append('<li> Customers:' + customer.CompanyName + ' ContactPerson:' + customer.ContactPerson + ' PhoneNumber: ' + customer.PhoneNumber + '  Email: ' + customer.Email + ' Adress: ' + customer.Adress +  '</li>');
+        }
+
+        $('#add').on('click', function(){
+
+                var customer = {
+                    CompanyName: CompanyName.val,
+                    ContactPerson: ContactPerson.val,
+                    PhoneNumber: PhoneNumber.val,
+                    Email: Email.val,
+                    Adress: Adress.val,
+                };
+
+                $.post('https://morilddata.azurewebsites.net/_api/database/customers', JSON, function() { console.log("OH YESH");
+              });
+            });
+    });
+
+    </script>
+
+    <script>
+        $("#contactIT").click(function(){
+        alert('Someone will come and help you soon, have a cup of coffee meanwhile');
+        });
+    </script>
+
+    <script>
+    $(function() {
+        $( "#datepicker" ).datepicker();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html xmlns:i="https://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://schemas.datacontract.org/2004/07/MorilDataServer.services.database.models"
+    lang="en" xml:lang="en">
+
+    <head>
+    <title>Morild Data BA </title>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/Background.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    </head>
+    <body>
+    <div class="container">
+            <div class="codrops-top">
+                <span class="right">
+                </span>
+                <div class="clr"></div>
+            </div>
+            <header>
+                <h1> <b><big>Morild Data BA</b></big> </h1>
+            </header>
+            <nav>
+                <ul>
+                <li id="contactIT"><a href="#"> Contact IT </a></li>
+                <li class = "c1"  ><a href="#"> Display projects </a> </li>
+                <li><a href="addNew.html"> Add new project </a></li>
+                <li><a href="getOrder.html"> Get project </a> </li>
+                <li><a href="customerPage.html"> Customer list </a> </li>
+
+               </ul>
+            </nav>
+            <section>
+   <table id="orders" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="10%"><b><big>Title<big><b></th>
+                <th width="5%"><b><big>Priority<big><b></th>
+                <th width="5%"><b><big>Deadline<big><b></th>
+                <th width="30%"><b><big>Description<big><b></th>
+                <th width="5%"><b><big>Order ID<big><b></th>
+                <th width="10%"><b><big>Company<big><b></th>
+                <th width="10%"><b><big>Contact person<big><b></th>
+
+
+            </tr>
+        </thead>
+    </table>
+
+    </section>
+
+    <script type='text/javascript' src="https://code.jquery.com/jquery-1.12.1.js"></script>
+    <link href="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js">
+    <script>
+        $(document).ready(function () {
+
+    	var url = "https://morilddata.azurewebsites.net/_api/database/orders"
+
+        var func = function (json) {
+            var tr;
+            for (var i = 0; i < json.length; i++) {
+                var date = new Date(json[i].Deadline);
+                date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+                tr = $('<tr/>');
+                tr.append("<td>" + json[i].Headline + "</td>");
+                tr.append("<td>" + json[i].PriorityNumber + "</td>");
+                tr.append("<td>" + date + "</td>");
+                tr.append("<td>" + json[i].Description + "</td>");
+                tr.append("<td>" + json[i].OrderId + "</td>");
+                tr.append("<td>" + json[i].CompanyName + "</td>");
+                tr.append("<td>" + json[i].ContactPerson + "</td>");
+                $('table').append(tr);
+            }
+        };
+
+    $.get(url).then(func);
+});
+
+    </script>
+
+    <script>
+        $("#contactIT").click(function(){
+        alert('Someone will come and help you soon, have a cup of coffee meanwhile');
+        });
+</script>
+
+</body>
+</html>

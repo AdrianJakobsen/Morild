@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html xmlns:i="https://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://schemas.datacontract.org/2004/07/MorilDataServer.services.database.models"
+    lang="en" xml:lang="en">
+    <head>
+        <title>Morild Data BA </title>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+        <link rel="stylesheet" type="text/css" href="css/Background.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        
+    </head>
+    <body>
+        <div class="container">
+            <div class="codrops-top">
+                <span class="right">
+                </span>
+                <div class="clr"></div>
+            </div>
+            <header>
+                <h1><b><big>Morild Data BA</big></b></h1>
+            </header>
+            <nav>
+                <ul>
+                    <li id="contactIT"><a href="#" class="selected" > Contact IT </a></li>
+                    <li><a href="displayProjects.html"> Display projects </a> </li>
+                    <li class = "c1" ><a href="#"> Add new project </a> </li>
+                    <li><a href="getOrder.html"> Get project </a> </li>
+                    <li><a href="customerPage.html"> Customer list </a> </li>
+                </ul>
+            </nav>
+            <section>
+                <div class="form-style-2">
+                    <form name="formAddNew" id:"orders" method="POST" action="https://morilddata.azurewebsites.net/_api/database/orders">
+                        <fieldset>
+                            <h2>Add new project</h2>
+                            <dl class="clearfix">
+                                <label for="headline"><b>Title: </b></label>
+                                <dd class="text"><input class="headline" type="text" name="Headline"/></dd>
+                                <br>
+                                <label for="headline"><b>Company: </b> </label>
+                                <select class="form-control" id="CompanyName">
+                                <option>Company 1</option>
+                                <option>Company 2</option>
+                                <option>Company 3</option>
+                            </select>
+                            <br>
+                                <br>
+                                <dt><label><b>Priority number</b></label></dt><dd>
+                                <label class="radio-inline"> 1 <input type="radio" name="optradio"></label>
+                                <label class="radio-inline"> 2 <input type="radio" name="optradio"></label>
+                                <label class="radio-inline"> 3 <input type="radio" name="optradio"></label>
+                                </dd>
+                                <br>
+                                <label for="headline"><b>Deadline: </b> </label>
+                                <dd class="text"><input type="text" id="datepicker" name="Deadline" class="dateStyle"/></dd>
+                            </select>
+                            </dd>
+                            <dd>
+                            <br>
+                            <label for="contactPerson"><b>Contact person: </b></label>
+                             <dd class="text"><input type="text" name="ContactPerson"/></dd>
+
+                            </dd>
+                            <br>
+                            <dt><label for="description"><b>Description: </b></label></dt>
+                            <dd class="text"><textarea rows="4" cols="50" type="textarea" name="Description"></textarea></dd>
+                            <dt class="full clearfix" id="lastrow">
+                            <div class="form-actions">
+                                <button type="add" id="add" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn">Cancel</button>
+                            </div>
+                            </dt>
+                        </dl>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+        <!-- SCRIPTS -->
+        <script type='text/javascript' src="https://code.jquery.com/jquery-1.12.1.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+        $(function (){
+        var orders = ('#orders');
+        var CompanyName = ('#CompanyName');
+        var CompanyId = ('#CompanyId');
+        var OrderId = ('#OrderId');
+        var Headline = ('#Headline');
+        var PriorityNumber = ('#PriorityNumber');
+        var DateCreated = ('#DateCreated');
+        var Deadline = ('#Deadline');
+        var ContactPerson = ('#ContactPerson');
+        var Description = ('#Description');
+        function addOrder(order) {
+        orders.append('<li> Headline:' + order.Headline +  'Company: '+ order.CompanyName +  ' CompanyId: ' + order.CompanyId + '  PriorityNumber: ' + order.PriorityNumber + ' Deadline: ' +  order.Deadline + ' ContactPerson: ' + order.ContactPerson + 'Description' + order.Description +  '</li>');
+        }
+        $('#add').on('click', function(){
+        var order = {
+        CompanyName: CompanyName.val,
+        PriorityNumber: PriorityNumber.val,
+        Deadline: Deadline.val,
+        ContactPerson: ContactPerson.val,
+        Description: Description.val,
+        };
+        $.post('https://morilddata.azurewebsites.net/_api/database/orders', JSON, function() { console.log("OH YESH");
+        });
+        });
+        });
+        </script>
+        <script>
+        $("#contactIT").click(function(){
+        alert('Someone will come and help you soon, have a cup of coffee meanwhile');
+        });
+        </script>
+        <script>
+        var dateToday = new Date();
+        $(function() {
+        $('#datepicker').datepicker({
+        numberOfMonths: 1,
+        showButtonPanel: true,
+        minDate: dateToday
+        });
+        });
+        </script>
+    </body>
+</html>

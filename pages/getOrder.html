@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html xmlns:i="https://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="https://schemas.datacontract.org/2004/07/MorilDataServer.services.database.models" 
+    lang="en" xml:lang="en"> 
+
+    <head>
+    <title>Morild Data BA </title>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/Background.css">
+
+    </head>
+    <body>
+    <div class="container">
+            <div class="codrops-top">
+                <span class="right">
+                </span>
+                <div class="clr"></div>
+            </div>
+            <header>
+                <h1> <b><big>Morild Data BA</b></big> </h1>
+            </header>
+            <nav>
+                <ul>
+                <li id="contactIT"><a href="#"> Contact IT </a></li>
+                <li><a href="displayProjects.html"> Display projects </a> </li>
+                <li><a href="addNew.html"> Add new project </a> </li>
+                <li class = "c1"  ><a href="#"> Get project </a> </li>
+                <li><a href="customerPage.html"> Customer list </a> </li>
+                </ul>
+                
+            </nav>
+            <section>
+
+             <table id="orders" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="10%"><b><big>Title<big><b></th>
+                <th width="5%"><b><big>Priority<big><b></th>
+                <th width="5%"><b><big>Deadline<big><b></th>
+                <th width="30%"><b><big>Description<big><b></th>
+                <th width="5%"><b><big>Order ID<big><b></th>
+                <th width="10%"><b><big>Company<big><b></th>
+                <th width="10%"><b><big>Contact person<big><b></th>
+            </tr>
+        </thead>
+    </table>
+
+
+    <ul id="orders"></ul>
+
+     <p>OrderId: <input type="number" id="OrderId"></p>
+
+    <button id="getOrder"> Get Order</button>
+
+    <script type='text/javascript' src="https://code.jquery.com/jquery-1.12.1.js"></script>
+    <script>
+        $(function (){
+
+    var $orders = $('#orders');
+    var $CompanyName = $('#CompanyName');
+    var $CompanyId = $('#CompanyId');
+    var $OrderId = $('#OrderId');
+    var $PriorityNumber = $('#PriorityNumber');
+    var $DateCreated = $('#DateCreated');
+    var $Deadline = $('#Deadline');
+    var $ContactPerson = $('#ContactPerson');
+    var $Description = $('#Description');
+    var url2 = 'https://morilddata.azurewebsites.net/_api/database/orders/';
+
+    function addOrder(data) {
+
+        var dateCreated = new Date(data.Deadline);
+        dateCreated = dateCreated.getDate()+"/"+(dateCreated.getMonth()+1)+"/"+dateCreated.getFullYear();
+        var tr; 
+            tr = $('<tr/>');
+            tr.append("<td>" + data.Headline + "</td>");
+            tr.append("<td>" + data.PriorityNumber + "</td>");
+            tr.append("<td>" + dateCreated + "</td>");
+            tr.append("<td>" + data.Description + "</td>");
+            tr.append("<td>" + data.OrderId + "</td>");
+            tr.append("<td>" + data.CompanyName + "</td>");
+            tr.append("<td>" + data.ContactPerson + "</td>");
+            $('table').append(tr);
+    }
+
+    $('#getOrder').on('click', function(){
+
+            var order = {
+                OrderId: $OrderId.val(), 
+                
+            };
+
+    $.ajax({
+        type: 'GET',
+        url: url2 + order.OrderId,
+        success: function(json){
+            $.get(url2 + order.OrderId, function(data){
+                addOrder(data);
+            });
+        },
+        error:function(){
+            alert('error loading');
+        }
+    });
+    });
+});
+
+    </script>
+    
+    <script type="text/javascript">
+        $("#contactIT").click(function(){
+        alert('Someone will come and help you soon, have a cup of coffee meanwhile');
+        });
+
+    </script>
+
+</body>
+</html>

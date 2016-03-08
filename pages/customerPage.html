@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html xmlns:i="https://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://schemas.datacontract.org/2004/07/MorilDataServer.services.database.models"
+    lang="en" xml:lang="en">
+
+    <head>
+    <title>Morild Data BA </title>
+
+    <!-- sets charset, and also links to stylesheets (css) that the page uses -->
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		      <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+        <link rel="stylesheet" type="text/css" href="css/Background.css">
+
+    </head>
+    <body>
+    <div class="container">
+            <div class="codrops-top">
+                <span class="right">
+                </span>
+                <div class="clr"></div>
+            </div>
+            <!-- this posts the title to the page -->
+            <header>
+                <h1> <b><big>Morild Data BA</b></big> </h1>
+            </header>
+            <nav>
+                <!-- Displays all the buttons that you can press to change pages -->
+                <ul>
+                <li id="contactIT"><a href="#"> Contact IT </a></li>
+                <li><a href="displayProjects.html"> Display projects </a> </li>
+                <li><a href="addNewCustomer.html"> Add new Customer </a> </li>
+                <li><a href="getOrder.html"> Get project </a> </li>
+                <li class = "c1" ><a href="#"> Customer list </a> </li>
+                </ul>
+
+            </nav>
+            <section>
+
+                <!-- displays column-names in the table over customers -->
+             <table id="customers" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th><b><big>Company<big><b></th>
+                <th><b><big>Company ID<big><b></th>
+                <th><b><big>ContactPerson<big><b></th>
+                <th><b><big>PhoneNumber<big><b></th>
+                <th><b><big>Email<big><b></th>
+                <th><b><big>Adress<big><b></th>
+            </tr>
+        </thead>
+    </table>
+
+
+
+    <script type='text/javascript' src="https://code.jquery.com/jquery-1.12.1.js"></script>
+    <link href="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js">
+
+    <!-- this script downloads information from the database and puts it into the table -->
+    <script>
+        $(document).ready(function () {
+
+    var url = "https://morilddata.azurewebsites.net/_api/database/customers"
+
+    $.getJSON(url,
+    function (json) {
+        var tr;
+        for (var i = 0; i < json.length; i++) {
+            var date = new Date(json[i].DateCreated);
+            date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+            tr = $('<tr/>');
+            tr.append("<td>" + json[i].CompanyName + "</td>");
+            tr.append("<td>" + json[i].CompanyId + "</td>");
+            tr.append("<td>" + json[i].ContactPerson + "</td>");
+            tr.append("<td>" + json[i].PhoneNumber + "</td>");
+            tr.append("<td>" + json[i].Email.toLowerCase() + "</td>");
+            tr.append("<td>" + json[i].Adress + "</td>");
+            $('table').append(tr);
+        }
+    });
+});
+
+    </script>
+    <!-- this script shows a popup message to the user. this will also when finished send a logmessage,
+        over whats wrong to the IT-crew, so that they can have a look at the problem -->
+    <script>
+        $("#contactIT").click(function(){
+        alert('Someone will come and help you soon, have a cup of coffee meanwhile');
+        });
+</script>
+
+</body>
+</html>

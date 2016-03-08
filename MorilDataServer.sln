@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorilDataServer", "MorilDataServer.csproj", "{FEE88DBA-7A85-44F3-B89D-4535A2E03E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI_NG_TokenbasedAuth", "..\WebAPI_NG_TokenbasedAuth\WebAPI_NG_TokenbasedAuth.csproj", "{B2741A58-EABD-4617-9FF6-033ED880D664}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEE88DBA-7A85-44F3-B89D-4535A2E03E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE88DBA-7A85-44F3-B89D-4535A2E03E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE88DBA-7A85-44F3-B89D-4535A2E03E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE88DBA-7A85-44F3-B89D-4535A2E03E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2741A58-EABD-4617-9FF6-033ED880D664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2741A58-EABD-4617-9FF6-033ED880D664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2741A58-EABD-4617-9FF6-033ED880D664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2741A58-EABD-4617-9FF6-033ED880D664}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
